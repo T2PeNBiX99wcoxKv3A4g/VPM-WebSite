@@ -58,7 +58,11 @@ npm install
 npm run dev            # UI preview with sample data (no rendered app.js)
 npm run build          # tsc + vite build + copies the template to dist/app.js
 npm run check:template # renders templates/app.js and syntax-checks the result
+npm run upgrade        # drop the lockfile, bump every dependency, then npm install
 ```
+
+`npm run upgrade` mirrors the other sites: it deletes `package-lock.json`, runs
+`npm-check-updates -u` and leaves the install to you.
 
 `npm run dev` uses `src/dev-data.ts` because `app.js` only exists after the listing action
 runs.
