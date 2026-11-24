@@ -32,16 +32,16 @@ it with sample data and fails if the result is not valid JavaScript.
 
 ## Structure
 
-| Path | Purpose |
-| --- | --- |
-| `index.html` | Vite entry point (the action's `index.html` after publishing) |
-| `templates/app.js` | Scriban template that carries the listing data |
-| `src/main.tsx` | Bootstraps React and loads the listing data |
-| `src/App.tsx` | Page composition and shared state (theme, toast, dialogs) |
-| `src/components/` | One component per section, dialog and card |
-| `src/hooks/` | Theme persistence and clipboard handling |
-| `src/styles.css` | The existing stylesheet, unchanged |
-| `public/` | `banner.png` and `favicon.ico`, copied as-is |
+| Path               | Purpose                                                       |
+|--------------------|---------------------------------------------------------------|
+| `index.html`       | Vite entry point (the action's `index.html` after publishing) |
+| `templates/app.js` | Scriban template that carries the listing data                |
+| `src/main.tsx`     | Bootstraps React and loads the listing data                   |
+| `src/App.tsx`      | Page composition and shared state (theme, toast, dialogs)     |
+| `src/components/`  | One component per section, dialog and card                    |
+| `src/hooks/`       | Theme persistence and clipboard handling                      |
+| `src/styles.css`   | The existing stylesheet, unchanged                            |
+| `public/`          | `banner.png` and `favicon.ico`, copied as-is                  |
 
 ## Commands
 
