@@ -109,23 +109,6 @@ export const ClearButton = styled.button`
     }
 `;
 
-export const KeyboardTip = styled.div`
-    position: absolute;
-    right: 0.8rem;
-    padding: 0.15rem 0.45rem;
-    font-size: 0.72rem;
-    font-family: var(--font-mono);
-    color: var(--text-muted);
-    background: var(--bg-input);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    pointer-events: none;
-
-    @media ${mobile} {
-        display: none;
-    }
-`;
-
 export const Wrapper = styled.div`
     background: transparent;
     border: none;

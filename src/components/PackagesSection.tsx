@@ -10,7 +10,6 @@ import {
     EmptyState,
     EmptyTitle,
     Grid,
-    KeyboardTip,
     SearchBox,
     SearchInput,
     Section,
@@ -110,9 +109,6 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
                     >
                         <ClearIcon />
                     </ClearButton>
-                    <KeyboardTip id="searchKbdTip" style={query ? { display: "none" } : undefined}>
-                        /
-                    </KeyboardTip>
                 </SearchBox>
             </SectionHeader>
 
