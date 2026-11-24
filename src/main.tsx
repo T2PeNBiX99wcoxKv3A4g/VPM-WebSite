@@ -1,8 +1,8 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import {StrictMode} from "react";
+import {createRoot} from "react-dom/client";
 import "./styles.css";
-import { App } from "./App";
-import { loadListingData } from "./listing-data";
+import {App} from "./App";
+import {loadListingData} from "./listing-data";
 
 const container = document.getElementById("root");
 
@@ -13,7 +13,7 @@ if (!container) {
 void loadListingData().then(data => {
     createRoot(container).render(
         <StrictMode>
-            <App data={data} />
+            <App data={data}/>
         </StrictMode>
     );
 });

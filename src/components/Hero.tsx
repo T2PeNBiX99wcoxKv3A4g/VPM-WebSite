@@ -1,6 +1,6 @@
-import type { ListingInfo } from "../types";
-import { CopyButton } from "./CopyButton";
-import { CopyIcon, HelpCircleIcon, LinkIcon, PlusCircleIcon, UserIcon } from "./icons";
+import type {ListingInfo} from "../types";
+import {CopyButton} from "./CopyButton";
+import {CopyIcon, HelpCircleIcon, LinkIcon, PlusCircleIcon, UserIcon} from "./icons";
 
 interface HeroProps {
     listing: ListingInfo;
@@ -9,7 +9,7 @@ interface HeroProps {
     onCopy: (text: string, message?: string) => Promise<void>;
 }
 
-export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => {
+export const Hero = ({listing, onAddToVcc, onShowHelp, onCopy}: HeroProps) => {
     const author = listing.author;
 
     return (
@@ -18,7 +18,7 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
                 <div className="banner-container">
                     <div
                         className="banner-image"
-                        style={{ backgroundImage: `url(${listing.bannerImageUrl})` }}
+                        style={{backgroundImage: `url(${listing.bannerImageUrl})`}}
                     />
                 </div>
             ) : null}
@@ -30,7 +30,7 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
 
                 <div className="hero-meta">
                     <div className="author-tag" id="publishedByText">
-                        <UserIcon />
+                        <UserIcon/>
                         <span>Published by</span>
                         <a
                             href={author?.url || "#"}
@@ -52,7 +52,7 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
                 </div>
                 <div className="action-card-body addToVccBlock">
                     <div className="url-input-wrapper">
-                        <LinkIcon />
+                        <LinkIcon/>
                         <input
                             type="text"
                             id="vccUrlField"
@@ -69,7 +69,7 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
                             id="vccAddRepoButton"
                             onClick={onAddToVcc}
                         >
-                            <PlusCircleIcon />
+                            <PlusCircleIcon/>
                             <span>Add to VCC</span>
                         </button>
 
@@ -78,7 +78,7 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
                             value={listing.url}
                             message="Repository URL copied!"
                             onCopy={onCopy}
-                            icon={<CopyIcon />}
+                            icon={<CopyIcon/>}
                             label="Copy URL"
                         />
 
@@ -90,7 +90,7 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
                             title="How to add to VCC / ALCOM"
                             onClick={onShowHelp}
                         >
-                            <HelpCircleIcon />
+                            <HelpCircleIcon/>
                         </button>
                     </div>
                 </div>

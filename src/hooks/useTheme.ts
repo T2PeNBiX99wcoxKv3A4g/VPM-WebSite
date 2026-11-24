@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 
 const THEME_STORAGE_KEY = "vpm_theme_preference";
 
@@ -41,5 +41,5 @@ export const useTheme = () => {
         });
     }, []);
 
-    return { theme, toggleTheme };
+    return {theme, toggleTheme};
 };

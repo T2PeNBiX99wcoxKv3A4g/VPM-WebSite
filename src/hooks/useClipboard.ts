@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import {useCallback} from "react";
 
 const fallbackCopy = (text: string) => {
     const textarea = document.createElement("textarea");

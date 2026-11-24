@@ -1,6 +1,6 @@
-import type { PackageInfo } from "../types";
-import { CopyButton } from "./CopyButton";
-import { CopyIcon, DownloadIcon, DotsIcon, InfoIcon, PlusIcon } from "./icons";
+import type {PackageInfo} from "../types";
+import {CopyButton} from "./CopyButton";
+import {CopyIcon, DotsIcon, DownloadIcon, InfoIcon, PlusIcon} from "./icons";
 
 interface PackageCardProps {
     pkg: PackageInfo;
@@ -9,7 +9,7 @@ interface PackageCardProps {
     onCopy: (text: string, message?: string) => Promise<void>;
 }
 
-export const PackageCard = ({ pkg, onAddToVcc, onShowInfo, onCopy }: PackageCardProps) => {
+export const PackageCard = ({pkg, onAddToVcc, onShowInfo, onCopy}: PackageCardProps) => {
     const displayName = pkg.displayName || pkg.name;
 
     return (
@@ -42,7 +42,7 @@ export const PackageCard = ({ pkg, onAddToVcc, onShowInfo, onCopy }: PackageCard
                                 message={`Copied ID: ${pkg.name}`}
                                 title="Copy Package ID"
                                 onCopy={onCopy}
-                                icon={<CopyIcon size={13} />}
+                                icon={<CopyIcon size={13}/>}
                             />
                         </div>
                     </div>
@@ -57,7 +57,7 @@ export const PackageCard = ({ pkg, onAddToVcc, onShowInfo, onCopy }: PackageCard
                         data-package-id={pkg.name}
                         onClick={onAddToVcc}
                     >
-                        <PlusIcon />
+                        <PlusIcon/>
                         <span>Add to VCC</span>
                     </button>
                     <button
@@ -67,7 +67,7 @@ export const PackageCard = ({ pkg, onAddToVcc, onShowInfo, onCopy }: PackageCard
                         title="View Package Details"
                         onClick={() => onShowInfo(pkg)}
                     >
-                        <InfoIcon />
+                        <InfoIcon/>
                         <span>Details</span>
                     </button>
                     {pkg.zipUrl ? (
@@ -77,7 +77,7 @@ export const PackageCard = ({ pkg, onAddToVcc, onShowInfo, onCopy }: PackageCard
                             className="btn btn-sm btn-outline pkg-download-btn"
                             title="Download ZIP Archive"
                         >
-                            <DownloadIcon />
+                            <DownloadIcon/>
                             <span>Download</span>
                         </a>
                     ) : null}
@@ -86,9 +86,9 @@ export const PackageCard = ({ pkg, onAddToVcc, onShowInfo, onCopy }: PackageCard
                         className="btn btn-icon btn-sm rowMenuButton"
                         data-package-url={pkg.zipUrl}
                         title="More options"
-                        style={{ display: "none" }}
+                        style={{display: "none"}}
                     >
-                        <DotsIcon />
+                        <DotsIcon/>
                     </button>
                 </div>
             </div>

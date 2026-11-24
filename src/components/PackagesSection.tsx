@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import type { PackageInfo, PackageMap } from "../types";
-import { PackageCard } from "./PackageCard";
-import { ClearIcon, EmptySearchIcon, SearchIcon } from "./icons";
+import {useEffect, useMemo, useRef, useState} from "react";
+import type {PackageInfo, PackageMap} from "../types";
+import {PackageCard} from "./PackageCard";
+import {ClearIcon, EmptySearchIcon, SearchIcon} from "./icons";
 
 interface PackagesSectionProps {
     packages: PackageMap;
@@ -24,7 +24,7 @@ const matchesQuery = (pkg: PackageInfo, term: string) => {
     return haystack.includes(term);
 };
 
-export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: PackagesSectionProps) => {
+export const PackagesSection = ({packages, onAddToVcc, onShowInfo, onCopy}: PackagesSectionProps) => {
     const [query, setQuery] = useState("");
     const searchInput = useRef<HTMLInputElement>(null);
 
@@ -76,7 +76,7 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
                     </span>
                 </div>
                 <div className="searchBlock search-container">
-                    <SearchIcon />
+                    <SearchIcon/>
                     <input
                         ref={searchInput}
                         type="text"
@@ -99,9 +99,9 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
                             searchInput.current?.focus();
                         }}
                     >
-                        <ClearIcon />
+                        <ClearIcon/>
                     </button>
-                    <div className="search-kbd-tip" id="searchKbdTip" style={query ? { display: "none" } : undefined}>
+                    <div className="search-kbd-tip" id="searchKbdTip" style={query ? {display: "none"} : undefined}>
                         /
                     </div>
                 </div>
@@ -122,7 +122,7 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
 
                 <div id="noResultsState" className="empty-state" hidden={!(visible === 0 && total > 0)}>
                     <div className="empty-icon">
-                        <EmptySearchIcon />
+                        <EmptySearchIcon/>
                     </div>
                     <h3 className="empty-title">No packages found</h3>
                     <p className="empty-desc">

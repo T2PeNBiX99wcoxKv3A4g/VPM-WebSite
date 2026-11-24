@@ -1,4 +1,4 @@
-import type { ListingData } from "./types";
+import type {ListingData} from "./types";
 
 /**
  * Sample data for `npm run dev`, where no package-list-action rendering happens.
@@ -28,7 +28,7 @@ export const devListingData: ListingData = {
             version: "1.2.3",
             type: "Any",
             zipUrl: "https://example.com/package.zip",
-            author: { name: "Example Author", url: "https://github.com/example" },
+            author: {name: "Example Author", url: "https://github.com/example"},
             dependencies: {
                 "io.github.example.second": "^0.4.0",
                 "com.vrchat.worlds": ">=3.10.0",
@@ -44,7 +44,7 @@ export const devListingData: ListingData = {
             version: "0.4.1",
             type: "World",
             zipUrl: "https://example.com/world.zip",
-            author: { name: "Example Author", url: "https://github.com/example" },
+            author: {name: "Example Author", url: "https://github.com/example"},
             dependencies: {},
             keywords: [],
             license: "MIT",

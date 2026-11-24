@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import {type ReactNode, useEffect, useState} from "react";
 
 interface CopyButtonProps {
     value: string;
@@ -17,16 +17,16 @@ interface CopyButtonProps {
  * JavaScript handlers did by swapping the label text and adding `btn-copied`.
  */
 export const CopyButton = ({
-    value,
-    onCopy,
-    message,
-    className = "btn btn-secondary",
-    id,
-    title,
-    ariaLabel,
-    icon,
-    label,
-}: CopyButtonProps) => {
+                               value,
+                               onCopy,
+                               message,
+                               className = "btn btn-secondary",
+                               id,
+                               title,
+                               ariaLabel,
+                               icon,
+                               label,
+                           }: CopyButtonProps) => {
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {

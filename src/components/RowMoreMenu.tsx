@@ -1,4 +1,4 @@
-import { DownloadIcon } from "./icons";
+import {DownloadIcon} from "./icons";
 
 /**
  * Kept for markup compatibility with the previous listing: the per-card "more
@@ -7,7 +7,7 @@ import { DownloadIcon } from "./icons";
 export const RowMoreMenu = () => (
     <div className="row-more-menu" id="rowMoreMenu" hidden>
         <button type="button" className="menu-item-btn" id="rowMoreMenuDownload">
-            <DownloadIcon />
+            <DownloadIcon/>
             <span>Download .ZIP</span>
         </button>
     </div>

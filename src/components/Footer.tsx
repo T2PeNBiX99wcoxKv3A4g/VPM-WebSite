@@ -1,10 +1,10 @@
-import type { ListingInfo } from "../types";
+import type {ListingInfo} from "../types";
 
 interface FooterProps {
     listing: ListingInfo;
 }
 
-export const Footer = ({ listing }: FooterProps) => {
+export const Footer = ({listing}: FooterProps) => {
     const infoLink = listing.infoLink;
 
     return (

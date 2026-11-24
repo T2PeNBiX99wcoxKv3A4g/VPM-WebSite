@@ -1,6 +1,6 @@
-import type { ListingData, ListingInfo, PackageInfo, PackageMap } from "./types";
-import { devListingData } from "./dev-data";
-import { decodeHtmlEntities } from "./lib/html";
+import type {ListingData, ListingInfo, PackageInfo, PackageMap} from "./types";
+import {devListingData} from "./dev-data";
+import {decodeHtmlEntities} from "./lib/html";
 
 declare global {
     interface Window {
@@ -69,7 +69,7 @@ export const loadListingData = async (): Promise<ListingData> => {
             return devListingData;
         }
 
-        return { listing: fallbackListing, packages: {} };
+        return {listing: fallbackListing, packages: {}};
     }
 
     const packages = Object.fromEntries(

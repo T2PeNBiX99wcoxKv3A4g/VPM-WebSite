@@ -1,6 +1,6 @@
-import type { ListingInfo } from "../types";
-import { CopyButton } from "./CopyButton";
-import { BookIcon, CloseIcon, CopyIcon, InfoCircleIcon, PlusCircleIcon } from "./icons";
+import type {ListingInfo} from "../types";
+import {CopyButton} from "./CopyButton";
+import {BookIcon, CloseIcon, CopyIcon, InfoCircleIcon, PlusCircleIcon} from "./icons";
 
 interface HelpDialogProps {
     open: boolean;
@@ -10,7 +10,7 @@ interface HelpDialogProps {
     onCopy: (text: string, message?: string) => Promise<void>;
 }
 
-export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpDialogProps) => (
+export const HelpDialog = ({open, listing, onClose, onAddToVcc, onCopy}: HelpDialogProps) => (
     <div
         className={`modal-overlay${open ? "" : " is-hidden"}`}
         id="addListingToVccHelp"
@@ -25,7 +25,7 @@ export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpD
             <div className="modal-header">
                 <div className="modal-title-wrap">
                     <div className="modal-icon-badge">
-                        <BookIcon />
+                        <BookIcon/>
                     </div>
                     <div>
                         <h3 className="modal-title">How to Add Listing to VCC / ALCOM</h3>
@@ -39,7 +39,7 @@ export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpD
                     aria-label="Close dialog"
                     onClick={onClose}
                 >
-                    <CloseIcon />
+                    <CloseIcon/>
                 </button>
             </div>
 
@@ -59,7 +59,7 @@ export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpD
                             className="btn btn-primary btn-glow modalAddRepoTrigger"
                             onClick={onAddToVcc}
                         >
-                            <PlusCircleIcon size={16} />
+                            <PlusCircleIcon size={16}/>
                             <span>Add to VCC / ALCOM Now</span>
                         </button>
                     </div>
@@ -133,7 +133,7 @@ export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpD
                             value={listing.url}
                             message="Repository URL copied!"
                             onCopy={onCopy}
-                            icon={<CopyIcon />}
+                            icon={<CopyIcon/>}
                             label="Copy"
                         />
                     </div>
@@ -153,7 +153,7 @@ export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpD
                 </div>
 
                 <div className="guide-footer-note">
-                    <InfoCircleIcon />
+                    <InfoCircleIcon/>
                     <span>
                         For more information, see official{" "}
                         <a href="https://vcc.docs.vrchat.com" target="_blank" rel="noopener noreferrer">

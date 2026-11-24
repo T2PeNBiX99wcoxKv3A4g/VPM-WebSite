@@ -1,6 +1,6 @@
-import type { ListingInfo, PackageInfo } from "../types";
-import { CopyButton } from "./CopyButton";
-import { CloseIcon, CopyIcon, FileIcon, HelpCircleIcon, PackageIcon, PlusCircleIcon, UserIcon } from "./icons";
+import type {ListingInfo, PackageInfo} from "../types";
+import {CopyButton} from "./CopyButton";
+import {CloseIcon, CopyIcon, FileIcon, HelpCircleIcon, PackageIcon, PlusCircleIcon, UserIcon} from "./icons";
 
 interface PackageInfoDialogProps {
     pkg: PackageInfo | null;
@@ -11,7 +11,7 @@ interface PackageInfoDialogProps {
     onCopy: (text: string, message?: string) => Promise<void>;
 }
 
-export const PackageInfoDialog = ({ pkg, listing, onClose, onAddToVcc, onShowHelp, onCopy }: PackageInfoDialogProps) => {
+export const PackageInfoDialog = ({pkg, listing, onClose, onAddToVcc, onShowHelp, onCopy}: PackageInfoDialogProps) => {
     const open = pkg !== null;
     const dependencies = Object.entries(pkg?.dependencies ?? {});
     const keywords = pkg?.keywords ?? [];
@@ -32,7 +32,7 @@ export const PackageInfoDialog = ({ pkg, listing, onClose, onAddToVcc, onShowHel
                 <div className="modal-header">
                     <div className="modal-title-wrap">
                         <div className="modal-icon-badge">
-                            <PackageIcon />
+                            <PackageIcon/>
                         </div>
                         <div>
                             <h3 className="modal-title" id="packageInfoName">
@@ -55,7 +55,7 @@ export const PackageInfoDialog = ({ pkg, listing, onClose, onAddToVcc, onShowHel
                         aria-label="Close dialog"
                         onClick={onClose}
                     >
-                        <CloseIcon />
+                        <CloseIcon/>
                     </button>
                 </div>
 
@@ -71,7 +71,7 @@ export const PackageInfoDialog = ({ pkg, listing, onClose, onAddToVcc, onShowHel
                         <div className="modal-section">
                             <h5 className="modal-section-title">Author</h5>
                             <div className="author-link-wrap">
-                                <UserIcon />
+                                <UserIcon/>
                                 <a
                                     href={pkg?.author?.url || "#"}
                                     target="_blank"
@@ -88,7 +88,7 @@ export const PackageInfoDialog = ({ pkg, listing, onClose, onAddToVcc, onShowHel
                             <div className="modal-section" id="packageInfoLicenseContainer">
                                 <h5 className="modal-section-title">License</h5>
                                 <div className="license-wrap">
-                                    <FileIcon />
+                                    <FileIcon/>
                                     <a
                                         href={pkg?.licensesUrl || "#"}
                                         target="_blank"
@@ -137,7 +137,7 @@ export const PackageInfoDialog = ({ pkg, listing, onClose, onAddToVcc, onShowHel
                                 title="How to add listing to VCC"
                                 onClick={onShowHelp}
                             >
-                                <HelpCircleIcon />
+                                <HelpCircleIcon/>
                                 <span>Installation Guide</span>
                             </button>
                         </div>
@@ -157,7 +157,7 @@ export const PackageInfoDialog = ({ pkg, listing, onClose, onAddToVcc, onShowHel
                                 value={listing.url}
                                 message="Repository URL copied!"
                                 onCopy={onCopy}
-                                icon={<CopyIcon />}
+                                icon={<CopyIcon/>}
                                 label="Copy"
                             />
                         </div>
@@ -169,7 +169,7 @@ export const PackageInfoDialog = ({ pkg, listing, onClose, onAddToVcc, onShowHel
                             className="btn btn-primary modalAddRepoTrigger"
                             onClick={onAddToVcc}
                         >
-                            <PlusCircleIcon size={16} />
+                            <PlusCircleIcon size={16}/>
                             <span>Add Repository to VCC</span>
                         </button>
                     </div>
