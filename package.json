@@ -1,0 +1,23 @@
+{
+  "name": "vpm-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build && node scripts/copy-template.mjs",
+    "preview": "vite preview",
+    "check:template": "node scripts/check-template.mjs"
+  },
+  "dependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.3.0",
+    "typescript": "^7",
+    "vite": "^8.3.7"
+  }
+}

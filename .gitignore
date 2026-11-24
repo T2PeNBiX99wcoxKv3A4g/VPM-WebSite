@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.idea/
+.vscode/
+.junie/
+.opencode/
+AGENTS.md
+opencode.json
+.yafm-index.db
+*.log
