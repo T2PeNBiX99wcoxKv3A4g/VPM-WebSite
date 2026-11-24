@@ -45,7 +45,7 @@ it with sample data and fails if the result is not valid JavaScript.
 | `src/styles/global.scss` | Reset and document body (the only plain CSS)                  |
 | `src/styles/buttons.ts`  | Shared button variants and the layout helpers                 |
 | `src/hooks/`             | Theme persistence and clipboard handling                      |
-| `public/`                | `banner.png` and `favicon.ico`, copied as-is                  |
+| `public/`                | `banner.png`, `favicon.ico` and `vrchat-icon.png`, copied as-is |
 
 Styling is split by responsibility: Sass generates the theme custom properties and the
 reset, while every component keeps its own rules next to it in styled-components and only

@@ -1,6 +1,6 @@
 import type { ListingInfo } from "../types";
 import { CopyButton } from "./CopyButton";
-import { BookIcon, CloseIcon, CopyIcon, InfoCircleIcon, PlusCircleIcon } from "./icons";
+import { BookIcon, CloseIcon, CopyIcon, InfoCircleIcon, LinkIcon, PlusCircleIcon } from "./icons";
 import {
     Body,
     CloseButton,
@@ -123,6 +123,7 @@ export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpD
 
                     <UrlBox>
                         <UrlInputWrapper>
+                            <LinkIcon />
                             <UrlInput
                                 type="text"
                                 id="vccListingInfoUrlField"

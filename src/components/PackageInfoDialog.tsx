@@ -1,6 +1,16 @@
 import type { ListingInfo, PackageInfo } from "../types";
 import { CopyButton } from "./CopyButton";
-import { CloseIcon, CopyIcon, FileIcon, HelpCircleIcon, PackageIcon, PlusCircleIcon, UserIcon } from "./icons";
+import {
+    CloseIcon,
+    CopyIcon,
+    ExternalLinkIcon,
+    FileIcon,
+    HelpCircleIcon,
+    LinkIcon,
+    PackageIcon,
+    PlusCircleIcon,
+    UserIcon,
+} from "./icons";
 import {
     AccentLink,
     Body,
@@ -103,6 +113,7 @@ export const PackageInfoDialog = ({
                                         id="packageInfoAuthor"
                                     >
                                         {pkg.author.name || "Unknown Author"}
+                                        <ExternalLinkIcon />
                                     </AccentLink>
                                 ) : (
                                     <PlainValue id="packageInfoAuthor">{pkg?.author?.name || "Unknown Author"}</PlainValue>
@@ -123,6 +134,7 @@ export const PackageInfoDialog = ({
                                             id="packageInfoLicense"
                                         >
                                             {pkg.license || "License"}
+                                            <ExternalLinkIcon />
                                         </AccentLink>
                                     ) : (
                                         <PlainValue id="packageInfoLicense">{pkg?.license || "License"}</PlainValue>
@@ -169,6 +181,7 @@ export const PackageInfoDialog = ({
                         </SectionHeaderFlex>
                         <UrlBox>
                             <UrlInputWrapper>
+                                <LinkIcon />
                                 <UrlInput
                                     type="text"
                                     id="packageInfoVccUrlField"

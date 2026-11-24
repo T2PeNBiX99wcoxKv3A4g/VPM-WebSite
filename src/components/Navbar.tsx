@@ -14,7 +14,7 @@ export const Navbar = ({ listing, onToggleTheme }: NavbarProps) => {
         <NavbarBar>
             <Brand>
                 <LogoBadge>
-                    <BrandLogo />
+                    <img src="./vrchat-icon.png" alt="" width={22} height={22} />
                 </LogoBadge>
                 <Title>VPM Repository</Title>
             </Brand>
@@ -41,21 +41,3 @@ export const Navbar = ({ listing, onToggleTheme }: NavbarProps) => {
         </NavbarBar>
     );
 };
-
-const BrandLogo = () => (
-    // A package drawn as an isometric cube with a "V" on its face: VPM, and a box
-    // of packages rather than the generic parcel glyph used before.
-    <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-    >
-        <path d="M12 2.9 19.6 7.2v9.6L12 21.1 4.4 16.8V7.2z" />
-        <path d="M8.6 9.7 12 15.5l3.4-5.8" />
-    </svg>
-);
