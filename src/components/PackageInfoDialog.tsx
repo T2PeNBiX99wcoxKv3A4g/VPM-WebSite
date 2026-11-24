@@ -203,7 +203,7 @@ export const PackageInfoDialog = ({
 
                     <FooterActions>
                         <Button type="button" $variant="primary" onClick={onAddToVcc}>
-                            <PlusCircleIcon size={16} />
+                            <PlusCircleIcon width={16} height={16} />
                             <span>Add Repository to VCC</span>
                         </Button>
                     </FooterActions>

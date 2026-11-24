@@ -34,8 +34,8 @@ export const Navbar = ({ listing, onToggleTheme }: NavbarProps) => {
                     title="Toggle Theme"
                     onClick={onToggleTheme}
                 >
-                    <SunIcon />
-                    <MoonIcon />
+                    <SunIcon className="sun-icon" />
+                    <MoonIcon className="moon-icon" />
                 </ThemeToggle>
             </Actions>
         </NavbarBar>

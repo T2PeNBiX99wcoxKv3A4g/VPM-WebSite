@@ -53,7 +53,7 @@ export const PackageCard = ({ pkg, onAddToVcc, onShowInfo, onCopy }: PackageCard
                                 message={`Copied ID: ${pkg.name}`}
                                 title="Copy Package ID"
                                 onCopy={onCopy}
-                                icon={<CopyIcon size={13} />}
+                                icon={<CopyIcon width={13} height={13} />}
                             />
                         </IdRow>
                     </TitleArea>

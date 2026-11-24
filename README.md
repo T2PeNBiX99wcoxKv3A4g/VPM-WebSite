@@ -40,6 +40,7 @@ it with sample data and fails if the result is not valid JavaScript.
 | `src/App.tsx`            | Page composition and shared state (theme, toast, dialogs)     |
 | `src/components/*.tsx`   | One component per section, dialog and card                    |
 | `src/components/*.styles.ts` | Its styled-components declarations                        |
+| `src/components/icons/`  | One `.svg` per icon, imported as a React component            |
 | `src/styles/_tokens.scss`| Sass maps for the dark and light palettes                     |
 | `src/styles/_theme.scss` | Emits the `:root` / `[data-theme=light]` custom properties     |
 | `src/styles/global.scss` | Reset and document body (the only plain CSS)                  |
@@ -50,6 +51,11 @@ it with sample data and fails if the result is not valid JavaScript.
 Styling is split by responsibility: Sass generates the theme custom properties and the
 reset, while every component keeps its own rules next to it in styled-components and only
 reads `var(--…)`. Fonts are self-hosted through `@fontsource`.
+
+Icons are plain `.svg` files under `src/components/icons/`; `vite-plugin-svgr` turns
+`import XIcon from "./x.svg?react"` into a React component that forwards props to the
+`<svg>` element, so sizes and classes are set at the call site. SVGO is disabled for that
+plugin, so the files keep their authored geometry.
 
 ## Commands
 

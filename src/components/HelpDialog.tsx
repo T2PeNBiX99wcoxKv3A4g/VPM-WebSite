@@ -71,7 +71,7 @@ export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpD
                     </GuideDesc>
                     <GuideQuickAction>
                         <Button type="button" $variant="primary" $glow onClick={onAddToVcc}>
-                            <PlusCircleIcon size={16} />
+                            <PlusCircleIcon width={16} height={16} />
                             <span>Add to VCC / ALCOM Now</span>
                         </Button>
                     </GuideQuickAction>
