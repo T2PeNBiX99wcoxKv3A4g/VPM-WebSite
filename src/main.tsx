@@ -16,12 +16,17 @@ import "./styles/global.scss";
 
 import { App } from "./App";
 import { loadListingData } from "./listing-data";
+import { applyInitialTheme } from "./hooks/useTheme";
 
 const container = document.getElementById("root");
 
 if (!container) {
     throw new Error("Missing #root container");
 }
+
+// Before the first paint: the theme follows the system preference until the user
+// explicitly toggles it (then the choice is stored).
+applyInitialTheme();
 
 void loadListingData().then(data => {
     createRoot(container).render(

@@ -186,6 +186,12 @@ export const AccentLink = styled.a`
     }
 `;
 
+/** Used when a package has no URL, so nothing links to a meaningless `#`. */
+export const PlainValue = styled.span`
+    font-weight: 500;
+    color: var(--text-secondary);
+`;
+
 export const DepList = styled.ul`
     list-style: none;
     display: flex;

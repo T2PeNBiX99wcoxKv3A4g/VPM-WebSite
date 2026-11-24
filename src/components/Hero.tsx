@@ -8,6 +8,7 @@ import {
     ActionCardHint,
     ActionCardLabel,
     AuthorName,
+    AuthorNameText,
     AuthorTag,
     BannerContainer,
     BannerImage,
@@ -49,14 +50,18 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
                     <AuthorTag id="publishedByText">
                         <UserIcon />
                         <span>Published by</span>
-                        <AuthorName
-                            href={author?.url || "#"}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title={author?.email}
-                        >
-                            {author?.name}
-                        </AuthorName>
+                        {author?.url ? (
+                            <AuthorName
+                                href={author.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title={author.email}
+                            >
+                                {author.name}
+                            </AuthorName>
+                        ) : (
+                            <AuthorNameText>{author?.name}</AuthorNameText>
+                        )}
                     </AuthorTag>
                 </HeroMeta>
             </HeroContent>

@@ -14,6 +14,14 @@ const readPreferredTheme = (): ThemeName => {
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
 };
 
+/**
+ * Applies the preferred theme before React mounts. Without it the `:root` default
+ * (dark) would be painted first, which flashes for users whose system is light.
+ */
+export const applyInitialTheme = () => {
+    document.documentElement.setAttribute("data-theme", readPreferredTheme());
+};
+
 export const useTheme = () => {
     const [theme, setTheme] = useState<ThemeName>(readPreferredTheme);
 

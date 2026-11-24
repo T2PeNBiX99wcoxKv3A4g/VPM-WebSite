@@ -17,6 +17,9 @@ export const BannerContainer = styled.div`
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-md);
     background: var(--bg-card);
+    /* Decorative image: clicking it must not place a text caret. */
+    user-select: none;
+    -webkit-user-select: none;
 `;
 
 export const BannerImage = styled.div<{ $image: string }>`
@@ -103,6 +106,12 @@ export const AuthorName = styled.a`
     &:hover {
         text-decoration: underline;
     }
+`;
+
+/** Same look as {@link AuthorName} for listings without an author URL. */
+export const AuthorNameText = styled.span`
+    color: var(--accent-primary);
+    font-weight: 600;
 `;
 
 export const ActionCard = styled.div`

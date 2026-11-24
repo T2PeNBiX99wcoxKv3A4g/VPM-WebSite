@@ -15,6 +15,7 @@ import {
     MetaId,
     MetaRow,
     Overlay,
+    PlainValue,
     Section,
     SectionHeaderFlex,
     SectionText,
@@ -94,14 +95,18 @@ export const PackageInfoDialog = ({
                             <SectionTitle>Author</SectionTitle>
                             <InlineInfo>
                                 <UserIcon />
-                                <AccentLink
-                                    href={pkg?.author?.url || "#"}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    id="packageInfoAuthor"
-                                >
-                                    {pkg?.author?.name || "Unknown Author"}
-                                </AccentLink>
+                                {pkg?.author?.url ? (
+                                    <AccentLink
+                                        href={pkg.author.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        id="packageInfoAuthor"
+                                    >
+                                        {pkg.author.name || "Unknown Author"}
+                                    </AccentLink>
+                                ) : (
+                                    <PlainValue id="packageInfoAuthor">{pkg?.author?.name || "Unknown Author"}</PlainValue>
+                                )}
                             </InlineInfo>
                         </Section>
 
@@ -110,14 +115,18 @@ export const PackageInfoDialog = ({
                                 <SectionTitle>License</SectionTitle>
                                 <InlineInfo>
                                     <FileIcon />
-                                    <AccentLink
-                                        href={pkg?.licensesUrl || "#"}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        id="packageInfoLicense"
-                                    >
-                                        {pkg?.license || "License"}
-                                    </AccentLink>
+                                    {pkg?.licensesUrl ? (
+                                        <AccentLink
+                                            href={pkg.licensesUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            id="packageInfoLicense"
+                                        >
+                                            {pkg.license || "License"}
+                                        </AccentLink>
+                                    ) : (
+                                        <PlainValue id="packageInfoLicense">{pkg?.license || "License"}</PlainValue>
+                                    )}
                                 </InlineInfo>
                             </Section>
                         ) : null}
