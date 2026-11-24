@@ -167,6 +167,15 @@ export const UrlInputWrapper = styled.div`
     display: flex;
     align-items: center;
     flex: 1;
+
+    /* The link glyph sits inside the field, like the magnifier in the search box. */
+    & > svg {
+        position: absolute;
+        left: 0.9rem;
+        z-index: 1;
+        color: var(--text-muted);
+        pointer-events: none;
+    }
 `;
 
 /** Shared by the hero card and the install guide dialog. */

@@ -50,6 +50,17 @@ export const SearchBox = styled.div`
     max-width: 420px;
     flex: 1;
 
+    /* The magnifier sits inside the rounded field. The field has a backdrop
+       filter, which is a stacking context of its own, so the glyph needs a
+       z-index to stay visible on top of it. */
+    & > svg {
+        position: absolute;
+        left: 0.85rem;
+        z-index: 1;
+        color: var(--text-muted);
+        pointer-events: none;
+    }
+
     @media ${mobile} {
         max-width: 100%;
     }
