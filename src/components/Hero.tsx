@@ -1,6 +1,26 @@
-import type {ListingInfo} from "../types";
-import {CopyButton} from "./CopyButton";
-import {CopyIcon, HelpCircleIcon, LinkIcon, PlusCircleIcon, UserIcon} from "./icons";
+import type { ListingInfo } from "../types";
+import { CopyButton } from "./CopyButton";
+import { CopyIcon, HelpCircleIcon, LinkIcon, PlusCircleIcon, UserIcon } from "./icons";
+import {
+    ActionCard,
+    ActionCardBody,
+    ActionCardHeader,
+    ActionCardHint,
+    ActionCardLabel,
+    AuthorName,
+    AuthorTag,
+    BannerContainer,
+    BannerImage,
+    HeroContent,
+    HeroDescription,
+    HeroMeta,
+    HeroSection,
+    HeroTitle,
+    RepoBadge,
+    UrlInput,
+    UrlInputWrapper,
+} from "./Hero.styles";
+import { ActionButtons, Button } from "../styles/buttons";
 
 interface HeroProps {
     listing: ListingInfo;
@@ -9,92 +29,82 @@ interface HeroProps {
     onCopy: (text: string, message?: string) => Promise<void>;
 }
 
-export const Hero = ({listing, onAddToVcc, onShowHelp, onCopy}: HeroProps) => {
+export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => {
     const author = listing.author;
 
     return (
-        <section className="hero-section">
+        <HeroSection>
             {listing.bannerImage && listing.bannerImageUrl ? (
-                <div className="banner-container">
-                    <div
-                        className="banner-image"
-                        style={{backgroundImage: `url(${listing.bannerImageUrl})`}}
-                    />
-                </div>
+                <BannerContainer>
+                    <BannerImage $image={listing.bannerImageUrl} />
+                </BannerContainer>
             ) : null}
 
-            <div className="hero-content">
-                <div className="repo-badge">VRChat Package Manager Listing</div>
-                <h1 className="hero-title">{listing.name}</h1>
-                {listing.description ? <p className="hero-description">{listing.description}</p> : null}
+            <HeroContent>
+                <RepoBadge>VRChat Package Manager Listing</RepoBadge>
+                <HeroTitle>{listing.name}</HeroTitle>
+                {listing.description ? <HeroDescription>{listing.description}</HeroDescription> : null}
 
-                <div className="hero-meta">
-                    <div className="author-tag" id="publishedByText">
-                        <UserIcon/>
+                <HeroMeta>
+                    <AuthorTag id="publishedByText">
+                        <UserIcon />
                         <span>Published by</span>
-                        <a
+                        <AuthorName
                             href={author?.url || "#"}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="author-name"
                             title={author?.email}
                         >
                             {author?.name}
-                        </a>
-                    </div>
-                </div>
-            </div>
+                        </AuthorName>
+                    </AuthorTag>
+                </HeroMeta>
+            </HeroContent>
 
-            <div className="action-card">
-                <div className="action-card-header">
-                    <span className="action-card-label">Repository URL</span>
-                    <span className="action-card-hint">Add this URL to VCC or ALCOM</span>
-                </div>
-                <div className="action-card-body addToVccBlock">
-                    <div className="url-input-wrapper">
-                        <LinkIcon/>
-                        <input
+            <ActionCard>
+                <ActionCardHeader>
+                    <ActionCardLabel>Repository URL</ActionCardLabel>
+                    <ActionCardHint>Add this URL to VCC or ALCOM</ActionCardHint>
+                </ActionCardHeader>
+                <ActionCardBody>
+                    <UrlInputWrapper>
+                        <LinkIcon />
+                        <UrlInput
                             type="text"
                             id="vccUrlField"
-                            className="vccUrlField custom-url-input"
                             readOnly
                             value={listing.url}
                             aria-label="Listing URL"
                         />
-                    </div>
-                    <div className="action-buttons">
-                        <button
-                            type="button"
-                            className="btn btn-primary btn-glow"
-                            id="vccAddRepoButton"
-                            onClick={onAddToVcc}
-                        >
-                            <PlusCircleIcon/>
+                    </UrlInputWrapper>
+                    <ActionButtons>
+                        <Button type="button" $variant="primary" $glow id="vccAddRepoButton" onClick={onAddToVcc}>
+                            <PlusCircleIcon />
                             <span>Add to VCC</span>
-                        </button>
+                        </Button>
 
                         <CopyButton
                             id="vccUrlFieldCopy"
                             value={listing.url}
                             message="Repository URL copied!"
                             onCopy={onCopy}
-                            icon={<CopyIcon/>}
+                            icon={<CopyIcon />}
                             label="Copy URL"
                         />
 
-                        <button
+                        <Button
                             type="button"
-                            className="btn btn-icon"
+                            $variant="icon"
                             id="urlBarHelp"
                             aria-label="Installation Guide"
                             title="How to add to VCC / ALCOM"
                             onClick={onShowHelp}
                         >
-                            <HelpCircleIcon/>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
+                            <HelpCircleIcon />
+                        </Button>
+                    </ActionButtons>
+                </ActionCardBody>
+            </ActionCard>
+        </HeroSection>
     );
 };

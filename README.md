@@ -32,16 +32,24 @@ it with sample data and fails if the result is not valid JavaScript.
 
 ## Structure
 
-| Path               | Purpose                                                       |
-|--------------------|---------------------------------------------------------------|
-| `index.html`       | Vite entry point (the action's `index.html` after publishing) |
-| `templates/app.js` | Scriban template that carries the listing data                |
-| `src/main.tsx`     | Bootstraps React and loads the listing data                   |
-| `src/App.tsx`      | Page composition and shared state (theme, toast, dialogs)     |
-| `src/components/`  | One component per section, dialog and card                    |
-| `src/hooks/`       | Theme persistence and clipboard handling                      |
-| `src/styles.css`   | The existing stylesheet, unchanged                            |
-| `public/`          | `banner.png` and `favicon.ico`, copied as-is                  |
+| Path                     | Purpose                                                       |
+|--------------------------|---------------------------------------------------------------|
+| `index.html`             | Vite entry point (the action's `index.html` after publishing) |
+| `templates/app.js`       | Scriban template that carries the listing data                |
+| `src/main.tsx`           | Bootstraps React, the fonts and the global stylesheet         |
+| `src/App.tsx`            | Page composition and shared state (theme, toast, dialogs)     |
+| `src/components/*.tsx`   | One component per section, dialog and card                    |
+| `src/components/*.styles.ts` | Its styled-components declarations                        |
+| `src/styles/_tokens.scss`| Sass maps for the dark and light palettes                     |
+| `src/styles/_theme.scss` | Emits the `:root` / `[data-theme=light]` custom properties     |
+| `src/styles/global.scss` | Reset and document body (the only plain CSS)                  |
+| `src/styles/buttons.ts`  | Shared button variants and the layout helpers                 |
+| `src/hooks/`             | Theme persistence and clipboard handling                      |
+| `public/`                | `banner.png` and `favicon.ico`, copied as-is                  |
+
+Styling is split by responsibility: Sass generates the theme custom properties and the
+reset, while every component keeps its own rules next to it in styled-components and only
+reads `var(--…)`. Fonts are self-hosted through `@fontsource`.
 
 ## Commands
 

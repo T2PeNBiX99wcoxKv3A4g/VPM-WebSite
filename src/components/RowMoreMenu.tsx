@@ -1,14 +1,15 @@
-import {DownloadIcon} from "./icons";
+import { DownloadIcon } from "./icons";
+import { Menu, MenuItem } from "./RowMoreMenu.styles";
 
 /**
  * Kept for markup compatibility with the previous listing: the per-card "more
  * options" trigger is hidden, so the menu only needs to exist in the DOM.
  */
 export const RowMoreMenu = () => (
-    <div className="row-more-menu" id="rowMoreMenu" hidden>
-        <button type="button" className="menu-item-btn" id="rowMoreMenuDownload">
-            <DownloadIcon/>
+    <Menu id="rowMoreMenu" hidden>
+        <MenuItem type="button" id="rowMoreMenuDownload">
+            <DownloadIcon />
             <span>Download .ZIP</span>
-        </button>
-    </div>
+        </MenuItem>
+    </Menu>
 );

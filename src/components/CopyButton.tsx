@@ -1,32 +1,35 @@
-import {type ReactNode, useEffect, useState} from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { Button, type ButtonVariant } from "../styles/buttons";
 
 interface CopyButtonProps {
     value: string;
     onCopy: (text: string, message?: string) => Promise<void>;
     message?: string;
-    className?: string;
     id?: string;
     title?: string;
     ariaLabel?: string;
     icon: ReactNode;
     label?: string;
+    variant?: ButtonVariant;
+    small?: boolean;
 }
 
 /**
  * Copy buttons flash "Copied!" for a moment, which is what the previous plain
- * JavaScript handlers did by swapping the label text and adding `btn-copied`.
+ * JavaScript handlers did by swapping the label text.
  */
 export const CopyButton = ({
-                               value,
-                               onCopy,
-                               message,
-                               className = "btn btn-secondary",
-                               id,
-                               title,
-                               ariaLabel,
-                               icon,
-                               label,
-                           }: CopyButtonProps) => {
+    value,
+    onCopy,
+    message,
+    id,
+    title,
+    ariaLabel,
+    icon,
+    label,
+    variant = "secondary",
+    small = false,
+}: CopyButtonProps) => {
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
@@ -44,16 +47,17 @@ export const CopyButton = ({
     };
 
     return (
-        <button
+        <Button
             type="button"
             id={id}
-            className={`${className}${copied ? " btn-copied" : ""}`}
+            $variant={variant}
+            $small={small}
             title={title}
             aria-label={ariaLabel}
             onClick={handleClick}
         >
             {icon}
-            {label ? <span className="btn-copy-text">{copied ? "Copied!" : label}</span> : null}
-        </button>
+            {label ? <span>{copied ? "Copied!" : label}</span> : null}
+        </Button>
     );
 };

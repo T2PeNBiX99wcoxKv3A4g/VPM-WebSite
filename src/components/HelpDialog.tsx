@@ -1,6 +1,28 @@
-import type {ListingInfo} from "../types";
-import {CopyButton} from "./CopyButton";
-import {BookIcon, CloseIcon, CopyIcon, InfoCircleIcon, PlusCircleIcon} from "./icons";
+import type { ListingInfo } from "../types";
+import { CopyButton } from "./CopyButton";
+import { BookIcon, CloseIcon, CopyIcon, InfoCircleIcon, PlusCircleIcon } from "./icons";
+import {
+    Body,
+    CloseButton,
+    Dialog,
+    GuideBadge,
+    GuideCard,
+    GuideDesc,
+    GuideFooterNote,
+    GuideQuickAction,
+    GuideSteps,
+    GuideTitle,
+    Header,
+    IconBadge,
+    Overlay,
+    StepNumber,
+    Subtitle,
+    Title,
+    TitleWrap,
+    UrlBox,
+} from "./modal.styles";
+import { UrlInput, UrlInputWrapper } from "./Hero.styles";
+import { Button } from "../styles/buttons";
 
 interface HelpDialogProps {
     open: boolean;
@@ -10,9 +32,9 @@ interface HelpDialogProps {
     onCopy: (text: string, message?: string) => Promise<void>;
 }
 
-export const HelpDialog = ({open, listing, onClose, onAddToVcc, onCopy}: HelpDialogProps) => (
-    <div
-        className={`modal-overlay${open ? "" : " is-hidden"}`}
+export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpDialogProps) => (
+    <Overlay
+        $stacked
         id="addListingToVccHelp"
         hidden={!open}
         onClick={event => {
@@ -21,76 +43,58 @@ export const HelpDialog = ({open, listing, onClose, onAddToVcc, onCopy}: HelpDia
             }
         }}
     >
-        <div className="modal-dialog-content">
-            <div className="modal-header">
-                <div className="modal-title-wrap">
-                    <div className="modal-icon-badge">
-                        <BookIcon/>
-                    </div>
+        <Dialog>
+            <Header>
+                <TitleWrap>
+                    <IconBadge>
+                        <BookIcon />
+                    </IconBadge>
                     <div>
-                        <h3 className="modal-title">How to Add Listing to VCC / ALCOM</h3>
-                        <p className="modal-subtitle">Step-by-step installation instructions</p>
+                        <Title>How to Add Listing to VCC / ALCOM</Title>
+                        <Subtitle>Step-by-step installation instructions</Subtitle>
                     </div>
-                </div>
-                <button
-                    type="button"
-                    id="addListingToVccHelpClose"
-                    className="modal-close-btn"
-                    aria-label="Close dialog"
-                    onClick={onClose}
-                >
-                    <CloseIcon/>
-                </button>
-            </div>
+                </TitleWrap>
+                <CloseButton type="button" id="addListingToVccHelpClose" aria-label="Close dialog" onClick={onClose}>
+                    <CloseIcon />
+                </CloseButton>
+            </Header>
 
-            <div className="modal-body">
-                <div className="guide-method-card">
-                    <h4 className="guide-method-title">
-                        <span className="guide-method-badge">Method 1</span>
+            <Body>
+                <GuideCard>
+                    <GuideTitle>
+                        <GuideBadge>Method 1</GuideBadge>
                         One-Click Automatic Add (Recommended)
-                    </h4>
-                    <p className="guide-method-desc">
+                    </GuideTitle>
+                    <GuideDesc>
                         Click the button below to directly open your VCC or ALCOM client and import this
                         repository instantly:
-                    </p>
-                    <div className="guide-quick-action">
-                        <button
-                            type="button"
-                            className="btn btn-primary btn-glow modalAddRepoTrigger"
-                            onClick={onAddToVcc}
-                        >
-                            <PlusCircleIcon size={16}/>
+                    </GuideDesc>
+                    <GuideQuickAction>
+                        <Button type="button" $variant="primary" $glow onClick={onAddToVcc}>
+                            <PlusCircleIcon size={16} />
                             <span>Add to VCC / ALCOM Now</span>
-                        </button>
-                    </div>
-                </div>
+                        </Button>
+                    </GuideQuickAction>
+                </GuideCard>
 
-                <div className="guide-method-card">
-                    <h4 className="guide-method-title">
-                        <span className="guide-method-badge">Method 2</span>
+                <GuideCard>
+                    <GuideTitle>
+                        <GuideBadge>Method 2</GuideBadge>
                         Manual Repository Installation
-                    </h4>
-                    <ol className="guide-steps">
+                    </GuideTitle>
+                    <GuideSteps>
                         <li>
-                            <span className="step-num">1</span>
+                            <StepNumber>1</StepNumber>
                             <span>
                                 Open{" "}
                                 <strong>
-                                    <a
-                                        href="https://vrchat.com/home/download"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
+                                    <a href="https://vrchat.com/home/download" target="_blank" rel="noopener noreferrer">
                                         VCC (VRChat Creator Companion)
                                     </a>
                                 </strong>{" "}
                                 or{" "}
                                 <strong>
-                                    <a
-                                        href="https://vrc-get.anatawa12.com/alcom/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
+                                    <a href="https://vrc-get.anatawa12.com/alcom/" target="_blank" rel="noopener noreferrer">
                                         ALCOM
                                     </a>
                                 </strong>
@@ -98,62 +102,61 @@ export const HelpDialog = ({open, listing, onClose, onAddToVcc, onCopy}: HelpDia
                             </span>
                         </li>
                         <li>
-                            <span className="step-num">2</span>
+                            <StepNumber>2</StepNumber>
                             <span>
                                 Navigate to <strong>Settings</strong> &gt; <strong>Packages</strong> tab.
                             </span>
                         </li>
                         <li>
-                            <span className="step-num">3</span>
+                            <StepNumber>3</StepNumber>
                             <span>
                                 Click <strong>Add Repository</strong> in the top right.
                             </span>
                         </li>
                         <li>
-                            <span className="step-num">4</span>
+                            <StepNumber>4</StepNumber>
                             <span>
                                 Paste the listing URL shown below and click <strong>Add</strong>:
                             </span>
                         </li>
-                    </ol>
+                    </GuideSteps>
 
-                    <div className="modal-url-box">
-                        <div className="url-input-wrapper">
-                            <input
+                    <UrlBox>
+                        <UrlInputWrapper>
+                            <UrlInput
                                 type="text"
                                 id="vccListingInfoUrlField"
-                                className="vccUrlField custom-url-input"
                                 readOnly
                                 value={listing.url}
                                 aria-label="Listing URL"
                             />
-                        </div>
+                        </UrlInputWrapper>
                         <CopyButton
                             id="vccListingInfoUrlFieldCopy"
                             value={listing.url}
                             message="Repository URL copied!"
                             onCopy={onCopy}
-                            icon={<CopyIcon/>}
+                            icon={<CopyIcon />}
                             label="Copy"
                         />
-                    </div>
+                    </UrlBox>
 
-                    <ol className="guide-steps" start={5}>
+                    <GuideSteps start={5}>
                         <li>
-                            <span className="step-num">5</span>
+                            <StepNumber>5</StepNumber>
                             <span>
                                 Confirm the repository information and click <strong>"I Understand"</strong>.
                             </span>
                         </li>
                         <li>
-                            <span className="step-num">6</span>
+                            <StepNumber>6</StepNumber>
                             <span>Open your project to manage and install packages freely!</span>
                         </li>
-                    </ol>
-                </div>
+                    </GuideSteps>
+                </GuideCard>
 
-                <div className="guide-footer-note">
-                    <InfoCircleIcon/>
+                <GuideFooterNote>
+                    <InfoCircleIcon />
                     <span>
                         For more information, see official{" "}
                         <a href="https://vcc.docs.vrchat.com" target="_blank" rel="noopener noreferrer">
@@ -161,8 +164,8 @@ export const HelpDialog = ({open, listing, onClose, onAddToVcc, onCopy}: HelpDia
                         </a>
                         .
                     </span>
-                </div>
-            </div>
-        </div>
-    </div>
+                </GuideFooterNote>
+            </Body>
+        </Dialog>
+    </Overlay>
 );

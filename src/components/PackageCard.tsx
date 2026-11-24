@@ -1,6 +1,22 @@
-import type {PackageInfo} from "../types";
-import {CopyButton} from "./CopyButton";
-import {CopyIcon, DotsIcon, DownloadIcon, InfoIcon, PlusIcon} from "./icons";
+import type { PackageInfo } from "../types";
+import { CopyButton } from "./CopyButton";
+import { CopyIcon, DownloadIcon, DotsIcon, InfoIcon, PlusIcon } from "./icons";
+import {
+    Badges,
+    Card,
+    CardActions,
+    CardTop,
+    Description,
+    DisplayName,
+    HeaderRow,
+    IdRow,
+    IdText,
+    Row,
+    TitleArea,
+    TypeBadge,
+    VersionBadge,
+} from "./PackageCard.styles";
+import { Button, ButtonLink } from "../styles/buttons";
 
 interface PackageCardProps {
     pkg: PackageInfo;
@@ -9,89 +25,88 @@ interface PackageCardProps {
     onCopy: (text: string, message?: string) => Promise<void>;
 }
 
-export const PackageCard = ({pkg, onAddToVcc, onShowInfo, onCopy}: PackageCardProps) => {
+export const PackageCard = ({ pkg, onAddToVcc, onShowInfo, onCopy }: PackageCardProps) => {
     const displayName = pkg.displayName || pkg.name;
 
     return (
-        <div
-            className="package-card-row"
+        <Row
             data-package-name={displayName}
             data-package-id={pkg.name}
             data-package-desc={pkg.description}
             data-package-type={pkg.type}
         >
-            <div className="pkg-card">
-                <div className="pkg-card-top">
-                    <div className="pkg-title-area">
-                        <div className="pkg-header-row">
-                            <h3 className="packageName pkg-display-name">{displayName}</h3>
-                            <div className="pkg-badges">
-                                {pkg.type ? (
-                                    <span className={`badge badge-type badge-${pkg.type.toLowerCase()}`}>
-                                        {pkg.type}
-                                    </span>
-                                ) : null}
-                                {pkg.version ? <span className="badge badge-version">v{pkg.version}</span> : null}
-                            </div>
-                        </div>
-                        <div className="caption2 pkg-id-row">
-                            <span className="pkg-id-text">{pkg.name}</span>
+            <Card>
+                <CardTop>
+                    <TitleArea>
+                        <HeaderRow>
+                            <DisplayName>{displayName}</DisplayName>
+                            <Badges>
+                                {pkg.type ? <TypeBadge $type={pkg.type}>{pkg.type}</TypeBadge> : null}
+                                {pkg.version ? <VersionBadge>v{pkg.version}</VersionBadge> : null}
+                            </Badges>
+                        </HeaderRow>
+                        <IdRow>
+                            <IdText>{pkg.name}</IdText>
                             <CopyButton
-                                className="copy-id-btn"
+                                variant="ghost"
                                 value={pkg.name}
                                 message={`Copied ID: ${pkg.name}`}
                                 title="Copy Package ID"
                                 onCopy={onCopy}
-                                icon={<CopyIcon size={13}/>}
+                                icon={<CopyIcon size={13} />}
                             />
-                        </div>
-                    </div>
-                </div>
+                        </IdRow>
+                    </TitleArea>
+                </CardTop>
 
-                {pkg.description ? <p className="caption1 pkg-description">{pkg.description}</p> : null}
+                {pkg.description ? <Description>{pkg.description}</Description> : null}
 
-                <div className="pkg-card-actions">
-                    <button
+                <CardActions>
+                    <Button
                         type="button"
-                        className="btn btn-sm btn-primary rowAddToVccButton"
+                        $variant="primary"
+                        $small
                         data-package-id={pkg.name}
                         onClick={onAddToVcc}
                     >
-                        <PlusIcon/>
+                        <PlusIcon />
                         <span>Add to VCC</span>
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         type="button"
-                        className="btn btn-sm btn-secondary rowPackageInfoButton"
+                        $variant="secondary"
+                        $small
                         data-package-id={pkg.name}
                         title="View Package Details"
                         onClick={() => onShowInfo(pkg)}
                     >
-                        <InfoIcon/>
+                        <InfoIcon />
                         <span>Details</span>
-                    </button>
+                    </Button>
                     {pkg.zipUrl ? (
-                        <a
+                        <ButtonLink
                             href={pkg.zipUrl}
                             download
-                            className="btn btn-sm btn-outline pkg-download-btn"
+                            $variant="outline"
+                            $small
                             title="Download ZIP Archive"
                         >
-                            <DownloadIcon/>
+                            <DownloadIcon />
                             <span>Download</span>
-                        </a>
+                        </ButtonLink>
                     ) : null}
-                    <button
+                    <Button
                         type="button"
-                        className="btn btn-icon btn-sm rowMenuButton"
+                        $variant="icon"
+                        $small
                         data-package-url={pkg.zipUrl}
                         title="More options"
-                        style={{display: "none"}}
+                        style={{ display: "none" }}
                     >
-                        <DotsIcon/>
-                    </button>
-                </div>
-            </div>
-        </div>
+                        <DotsIcon />
+                    </Button>
+                </CardActions>
+            </Card>
+        </Row>
     );
 };

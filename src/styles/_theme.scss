@@ -1,0 +1,24 @@
+@use "tokens";
+
+@mixin custom-properties($values) {
+    @each $name, $value in $values {
+        --#{$name}: #{$value};
+    }
+}
+
+// The active theme is selected by `data-theme` on <html>, which the React theme hook
+// updates. Light mode only overrides the colours, so shadows/radii/fonts stay shared.
+@mixin theme-variables {
+    :root {
+        color-scheme: dark;
+
+        @include custom-properties(tokens.$dark);
+        @include custom-properties(tokens.$static);
+    }
+
+    [data-theme="light"] {
+        color-scheme: light;
+
+        @include custom-properties(tokens.$light);
+    }
+}

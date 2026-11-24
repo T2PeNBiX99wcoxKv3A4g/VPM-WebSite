@@ -1,23 +1,24 @@
-import {useCallback, useEffect, useState} from "react";
-import type {ListingData, PackageInfo} from "./types";
-import {useCopyToClipboard} from "./hooks/useClipboard";
-import {useTheme} from "./hooks/useTheme";
-import {Footer} from "./components/Footer";
-import {HelpDialog} from "./components/HelpDialog";
-import {Hero} from "./components/Hero";
-import {Navbar} from "./components/Navbar";
-import {PackageInfoDialog} from "./components/PackageInfoDialog";
-import {PackagesSection} from "./components/PackagesSection";
-import {RowMoreMenu} from "./components/RowMoreMenu";
-import {Toast} from "./components/Toast";
+import { useCallback, useEffect, useState } from "react";
+import type { ListingData, PackageInfo } from "./types";
+import { useCopyToClipboard } from "./hooks/useClipboard";
+import { useTheme } from "./hooks/useTheme";
+import { AppContainer, BgGlow } from "./components/App.styles";
+import { Footer } from "./components/Footer";
+import { HelpDialog } from "./components/HelpDialog";
+import { Hero } from "./components/Hero";
+import { Navbar } from "./components/Navbar";
+import { PackageInfoDialog } from "./components/PackageInfoDialog";
+import { PackagesSection } from "./components/PackagesSection";
+import { RowMoreMenu } from "./components/RowMoreMenu";
+import { Toast } from "./components/Toast";
 
 interface AppProps {
     data: ListingData;
 }
 
-export const App = ({data}: AppProps) => {
-    const {listing, packages} = data;
-    const {theme, toggleTheme} = useTheme();
+export const App = ({ data }: AppProps) => {
+    const { listing, packages } = data;
+    const { theme, toggleTheme } = useTheme();
     const [toast, setToast] = useState<string | null>(null);
     const [helpOpen, setHelpOpen] = useState(false);
     const [infoPackage, setInfoPackage] = useState<PackageInfo | null>(null);
@@ -75,10 +76,10 @@ export const App = ({data}: AppProps) => {
 
     return (
         <>
-            <div className="bg-glow" aria-hidden="true"/>
+            <BgGlow aria-hidden="true" />
 
-            <div className="app-container">
-                <Navbar listing={listing} onToggleTheme={handleToggleTheme}/>
+            <AppContainer>
+                <Navbar listing={listing} onToggleTheme={handleToggleTheme} />
                 <Hero
                     listing={listing}
                     onAddToVcc={addRepoToVcc}
@@ -91,10 +92,10 @@ export const App = ({data}: AppProps) => {
                     onShowInfo={setInfoPackage}
                     onCopy={copy}
                 />
-                <Footer listing={listing}/>
-            </div>
+                <Footer listing={listing} />
+            </AppContainer>
 
-            <RowMoreMenu/>
+            <RowMoreMenu />
 
             <HelpDialog
                 open={helpOpen}
@@ -113,7 +114,7 @@ export const App = ({data}: AppProps) => {
                 onCopy={copy}
             />
 
-            <Toast message={toast}/>
+            <Toast message={toast} />
         </>
     );
 };

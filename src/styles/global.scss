@@ -1,0 +1,38 @@
+@use "theme";
+
+// Global layer only: the theme custom properties, the reset and the document body.
+// Everything that belongs to a component lives in its styled-components module.
+@include theme.theme-variables;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Styled components rely on this for `hidden` (statuses, filtered rows, dialogs).
+[hidden] {
+    display: none !important;
+}
+
+html {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    min-height: 100vh;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}

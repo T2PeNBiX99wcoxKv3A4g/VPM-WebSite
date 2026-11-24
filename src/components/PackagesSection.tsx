@@ -1,7 +1,25 @@
-import {useEffect, useMemo, useRef, useState} from "react";
-import type {PackageInfo, PackageMap} from "../types";
-import {PackageCard} from "./PackageCard";
-import {ClearIcon, EmptySearchIcon, SearchIcon} from "./icons";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { PackageInfo, PackageMap } from "../types";
+import { PackageCard } from "./PackageCard";
+import { ClearIcon, EmptySearchIcon, SearchIcon } from "./icons";
+import {
+    ClearButton,
+    CountBadge,
+    EmptyDesc,
+    EmptyIcon,
+    EmptyState,
+    EmptyTitle,
+    Grid,
+    KeyboardTip,
+    SearchBox,
+    SearchInput,
+    Section,
+    SectionHeader,
+    SectionTitle,
+    TitleWrap,
+    Wrapper,
+} from "./PackagesSection.styles";
+import { Button } from "../styles/buttons";
 
 interface PackagesSectionProps {
     packages: PackageMap;
@@ -11,12 +29,7 @@ interface PackagesSectionProps {
 }
 
 const matchesQuery = (pkg: PackageInfo, term: string) => {
-    const haystack = [
-        pkg.displayName,
-        pkg.name,
-        pkg.description,
-        pkg.type,
-    ]
+    const haystack = [pkg.displayName, pkg.name, pkg.description, pkg.type]
         .filter(Boolean)
         .join(" ")
         .toLowerCase();
@@ -24,7 +37,7 @@ const matchesQuery = (pkg: PackageInfo, term: string) => {
     return haystack.includes(term);
 };
 
-export const PackagesSection = ({packages, onAddToVcc, onShowInfo, onCopy}: PackagesSectionProps) => {
+export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: PackagesSectionProps) => {
     const [query, setQuery] = useState("");
     const searchInput = useRef<HTMLInputElement>(null);
 
@@ -67,30 +80,26 @@ export const PackagesSection = ({packages, onAddToVcc, onShowInfo, onCopy}: Pack
                 : `${visible} of ${total} packages`;
 
     return (
-        <section className="packages-section">
-            <div className="packages-section-header">
-                <div className="packages-title-wrap">
-                    <h2 className="packages-title">Packages</h2>
-                    <span className="packages-count-badge" id="packageCountBadge">
-                        {countLabel}
-                    </span>
-                </div>
-                <div className="searchBlock search-container">
-                    <SearchIcon/>
-                    <input
+        <Section>
+            <SectionHeader>
+                <TitleWrap>
+                    <SectionTitle>Packages</SectionTitle>
+                    <CountBadge id="packageCountBadge">{countLabel}</CountBadge>
+                </TitleWrap>
+                <SearchBox>
+                    <SearchIcon />
+                    <SearchInput
                         ref={searchInput}
                         type="text"
                         id="searchInput"
-                        className="search-input"
                         placeholder="Search packages by name, ID or description..."
                         autoComplete="off"
                         value={query}
                         onChange={event => setQuery(event.target.value)}
                     />
-                    <button
+                    <ClearButton
                         type="button"
                         id="searchClearBtn"
-                        className="search-clear-btn"
                         aria-label="Clear search"
                         title="Clear search"
                         hidden={!query}
@@ -99,16 +108,16 @@ export const PackagesSection = ({packages, onAddToVcc, onShowInfo, onCopy}: Pack
                             searchInput.current?.focus();
                         }}
                     >
-                        <ClearIcon/>
-                    </button>
-                    <div className="search-kbd-tip" id="searchKbdTip" style={query ? {display: "none"} : undefined}>
+                        <ClearIcon />
+                    </ClearButton>
+                    <KeyboardTip id="searchKbdTip" style={query ? { display: "none" } : undefined}>
                         /
-                    </div>
-                </div>
-            </div>
+                    </KeyboardTip>
+                </SearchBox>
+            </SectionHeader>
 
-            <div className="packages packages-card-wrapper">
-                <div id="packageGrid" className="package-grid">
+            <Wrapper>
+                <Grid id="packageGrid">
                     {visiblePackages.map(pkg => (
                         <PackageCard
                             key={pkg.name}
@@ -118,29 +127,30 @@ export const PackagesSection = ({packages, onAddToVcc, onShowInfo, onCopy}: Pack
                             onCopy={onCopy}
                         />
                     ))}
-                </div>
+                </Grid>
 
-                <div id="noResultsState" className="empty-state" hidden={!(visible === 0 && total > 0)}>
-                    <div className="empty-icon">
-                        <EmptySearchIcon/>
-                    </div>
-                    <h3 className="empty-title">No packages found</h3>
-                    <p className="empty-desc">
+                <EmptyState id="noResultsState" hidden={!(visible === 0 && total > 0)}>
+                    <EmptyIcon>
+                        <EmptySearchIcon />
+                    </EmptyIcon>
+                    <EmptyTitle>No packages found</EmptyTitle>
+                    <EmptyDesc>
                         No packages matched your search query. Try searching with different keywords.
-                    </p>
-                    <button
+                    </EmptyDesc>
+                    <Button
                         type="button"
+                        $variant="secondary"
+                        $small
                         id="resetSearchBtn"
-                        className="btn btn-sm btn-secondary"
                         onClick={() => {
                             setQuery("");
                             searchInput.current?.focus();
                         }}
                     >
                         Clear Search Filter
-                    </button>
-                </div>
-            </div>
-        </section>
+                    </Button>
+                </EmptyState>
+            </Wrapper>
+        </Section>
     );
 };
