@@ -57,7 +57,7 @@ const PACKAGES = {
       {{~ end ~}}
     ],
     license: `{{ package.License | html.escape }}`,
-    licensesUrl: `{{ package.LicensesUrl | html.escape }}`,
+    licensesUrl: `{{ package.LicenseUrl | html.escape }}`,
   },
 {{~ end ~}}
 };

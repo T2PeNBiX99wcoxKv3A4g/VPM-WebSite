@@ -151,6 +151,15 @@ const listingInfo = (overrides = {}) => ({
 
 const fixtures = {
     "happy path": {
+        // Values the rendered template must contain. This is what catches a member
+        // name that no longer matches the action's anonymous object (it would render
+        // as an empty string and still be valid JavaScript).
+        expect: [
+            "licensesUrl: `https://example.com/license`",
+            "zipUrl: `https://example.com/a.zip`",
+            "email: `author@example.com`",
+            "bannerImageUrl: `banner.png`",
+        ],
         listingInfo: listingInfo({
             Description: "A repository",
             Author: {
@@ -174,7 +183,7 @@ const fixtures = {
                 Dependencies: [{ Name: "io.github.example.second", Version: "^0.4.0" }],
                 Keywords: ["example"],
                 License: "MIT",
-                LicensesUrl: "https://example.com/license",
+                LicenseUrl: "https://example.com/license",
             },
         ],
     },
@@ -192,7 +201,7 @@ const fixtures = {
                 Dependencies: [],
                 Keywords: [],
                 License: "MIT",
-                LicensesUrl: "https://example.com/license",
+                LicenseUrl: "https://example.com/license",
             },
         ],
     },
@@ -211,6 +220,12 @@ for (const [name, fixture] of Object.entries(fixtures)) {
         rendered = render(buildTree(tokenize(template)), fixture);
         // Compiles without running, so the `window.*` assignments are harmless.
         new Function(rendered);
+
+        const missing = (fixture.expect ?? []).filter(snippet => !rendered.includes(snippet));
+        if (missing.length > 0) {
+            throw new Error(`rendered output is missing: ${missing.join(" | ")}`);
+        }
+
         console.log(`ok   ${name}`);
     } catch (error) {
         failed = true;
