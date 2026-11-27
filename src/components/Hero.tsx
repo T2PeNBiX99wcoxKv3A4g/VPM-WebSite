@@ -10,8 +10,6 @@ import {
     AuthorName,
     AuthorNameText,
     AuthorTag,
-    BannerContainer,
-    BannerImage,
     HeroContent,
     HeroDescription,
     HeroMeta,
@@ -22,6 +20,7 @@ import {
     UrlInputWrapper,
 } from "./Hero.styles";
 import { ActionButtons, Button } from "../styles/buttons";
+import { useI18n } from "../i18n/Provider";
 
 interface HeroProps {
     listing: ListingInfo;
@@ -31,25 +30,20 @@ interface HeroProps {
 }
 
 export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => {
+    const { t } = useI18n();
     const author = listing.author;
 
     return (
         <HeroSection>
-            {listing.bannerImage && listing.bannerImageUrl ? (
-                <BannerContainer>
-                    <BannerImage $image={listing.bannerImageUrl} />
-                </BannerContainer>
-            ) : null}
-
             <HeroContent>
-                <RepoBadge>VRChat Package Manager Listing</RepoBadge>
+                <RepoBadge>{t("hero.badge")}</RepoBadge>
                 <HeroTitle>{listing.name}</HeroTitle>
                 {listing.description ? <HeroDescription>{listing.description}</HeroDescription> : null}
 
                 <HeroMeta>
                     <AuthorTag id="publishedByText">
                         <UserIcon />
-                        <span>Published by</span>
+                        <span>{t("hero.publishedBy")}</span>
                         {author?.url ? (
                             <AuthorName
                                 href={author.url}
@@ -68,8 +62,8 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
 
             <ActionCard>
                 <ActionCardHeader>
-                    <ActionCardLabel>Repository URL</ActionCardLabel>
-                    <ActionCardHint>Add this URL to VCC or ALCOM</ActionCardHint>
+                    <ActionCardLabel>{t("hero.repoUrl")}</ActionCardLabel>
+                    <ActionCardHint>{t("hero.repoHint")}</ActionCardHint>
                 </ActionCardHeader>
                 <ActionCardBody>
                     <UrlInputWrapper>
@@ -79,30 +73,30 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
                             id="vccUrlField"
                             readOnly
                             value={listing.url}
-                            aria-label="Listing URL"
+                            aria-label={t("hero.listingUrlAria")}
                         />
                     </UrlInputWrapper>
                     <ActionButtons>
                         <Button type="button" $variant="primary" $glow id="vccAddRepoButton" onClick={onAddToVcc}>
                             <PlusCircleIcon />
-                            <span>Add to VCC</span>
+                            <span>{t("hero.addToVcc")}</span>
                         </Button>
 
                         <CopyButton
                             id="vccUrlFieldCopy"
                             value={listing.url}
-                            message="Repository URL copied!"
+                            message={t("toast.copiedUrl")}
                             onCopy={onCopy}
                             icon={<CopyIcon />}
-                            label="Copy URL"
+                            label={t("hero.copyUrl")}
                         />
 
                         <Button
                             type="button"
                             $variant="icon"
                             id="urlBarHelp"
-                            aria-label="Installation Guide"
-                            title="How to add to VCC / ALCOM"
+                            aria-label={t("hero.helpAria")}
+                            title={t("hero.help")}
                             onClick={onShowHelp}
                         >
                             <HelpCircleIcon />

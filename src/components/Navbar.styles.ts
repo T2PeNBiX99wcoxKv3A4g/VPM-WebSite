@@ -116,3 +116,59 @@ export const ThemeToggle = styled.button`
         }
     }
 `;
+
+export const LanguageLabel = styled.label`
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-muted);
+    transition: color var(--transition-fast);
+
+    &:focus-within {
+        color: var(--accent-primary);
+    }
+
+    & > svg {
+        flex: none;
+    }
+`;
+
+export const LanguageSelect = styled.select`
+    appearance: none;
+    padding: 0.4rem 0.6rem;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background var(--transition-fast),
+        box-shadow var(--transition-fast);
+
+    &:hover {
+        border-color: var(--border-color-hover);
+        background: var(--bg-card-hover);
+    }
+
+    &:focus-visible {
+        outline: none;
+        border-color: var(--border-color-focus);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    option {
+        color: var(--text-primary);
+        background: var(--bg-modal);
+    }
+`;
+
+/** Screen-reader only label for the language picker. */
+export const VisuallyHidden = styled.span`
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+`;

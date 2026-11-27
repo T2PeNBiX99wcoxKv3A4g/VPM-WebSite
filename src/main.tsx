@@ -15,6 +15,7 @@ import "@fontsource/jetbrains-mono/latin-600.css";
 import "./styles/global.scss";
 
 import { App } from "./App";
+import { I18nProvider } from "./i18n/Provider";
 import { loadListingData } from "./listing-data";
 import { applyInitialTheme } from "./hooks/useTheme";
 
@@ -31,7 +32,9 @@ applyInitialTheme();
 void loadListingData().then(data => {
     createRoot(container).render(
         <StrictMode>
-            <App data={data} />
+            <I18nProvider>
+                <App data={data} />
+            </I18nProvider>
         </StrictMode>
     );
 });

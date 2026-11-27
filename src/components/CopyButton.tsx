@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Button, type ButtonVariant } from "../styles/buttons";
+import { useI18n } from "../i18n/Provider";
 
 interface CopyButtonProps {
     value: string;
@@ -30,6 +31,7 @@ export const CopyButton = ({
     variant = "secondary",
     small = false,
 }: CopyButtonProps) => {
+    const { t } = useI18n();
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
@@ -40,6 +42,9 @@ export const CopyButton = ({
         const timeout = window.setTimeout(() => setCopied(false), 1500);
         return () => window.clearTimeout(timeout);
     }, [copied]);
+
+    // A different language means a different label for the copied state.
+    useEffect(() => setCopied(false), [t]);
 
     const handleClick = async () => {
         await onCopy(value, message);
@@ -57,7 +62,7 @@ export const CopyButton = ({
             onClick={handleClick}
         >
             {icon}
-            {label ? <span>{copied ? "Copied!" : label}</span> : null}
+            {label ? <span>{copied ? t("copy.done") : label}</span> : null}
         </Button>
     );
 };

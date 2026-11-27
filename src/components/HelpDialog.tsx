@@ -23,6 +23,8 @@ import {
 } from "./modal.styles";
 import { UrlInput, UrlInputWrapper } from "./Hero.styles";
 import { Button } from "../styles/buttons";
+import { useI18n } from "../i18n/Provider";
+import { RichText } from "../i18n/RichText";
 
 interface HelpDialogProps {
     open: boolean;
@@ -32,141 +34,182 @@ interface HelpDialogProps {
     onCopy: (text: string, message?: string) => Promise<void>;
 }
 
-export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpDialogProps) => (
-    <Overlay
-        $stacked
-        id="addListingToVccHelp"
-        hidden={!open}
-        onClick={event => {
-            if (event.target === event.currentTarget) {
-                onClose();
-            }
-        }}
-    >
-        <Dialog>
-            <Header>
-                <TitleWrap>
-                    <IconBadge>
-                        <BookIcon />
-                    </IconBadge>
-                    <div>
-                        <Title>How to Add Listing to VCC / ALCOM</Title>
-                        <Subtitle>Step-by-step installation instructions</Subtitle>
-                    </div>
-                </TitleWrap>
-                <CloseButton type="button" id="addListingToVccHelpClose" aria-label="Close dialog" onClick={onClose}>
-                    <CloseIcon />
-                </CloseButton>
-            </Header>
+export const HelpDialog = ({ open, listing, onClose, onAddToVcc, onCopy }: HelpDialogProps) => {
+    const { t } = useI18n();
 
-            <Body>
-                <GuideCard>
-                    <GuideTitle>
-                        <GuideBadge>Method 1</GuideBadge>
-                        One-Click Automatic Add (Recommended)
-                    </GuideTitle>
-                    <GuideDesc>
-                        Click the button below to directly open your VCC or ALCOM client and import this
-                        repository instantly:
-                    </GuideDesc>
-                    <GuideQuickAction>
-                        <Button type="button" $variant="primary" $glow onClick={onAddToVcc}>
-                            <PlusCircleIcon width={16} height={16} />
-                            <span>Add to VCC / ALCOM Now</span>
-                        </Button>
-                    </GuideQuickAction>
-                </GuideCard>
+    return (
+        <Overlay
+            $stacked
+            id="addListingToVccHelp"
+            hidden={!open}
+            onClick={event => {
+                if (event.target === event.currentTarget) {
+                    onClose();
+                }
+            }}
+        >
+            <Dialog>
+                <Header>
+                    <TitleWrap>
+                        <IconBadge>
+                            <BookIcon />
+                        </IconBadge>
+                        <div>
+                            <Title>{t("guide.title")}</Title>
+                            <Subtitle>{t("guide.subtitle")}</Subtitle>
+                        </div>
+                    </TitleWrap>
+                    <CloseButton
+                        type="button"
+                        id="addListingToVccHelpClose"
+                        aria-label={t("details.close")}
+                        onClick={onClose}
+                    >
+                        <CloseIcon />
+                    </CloseButton>
+                </Header>
 
-                <GuideCard>
-                    <GuideTitle>
-                        <GuideBadge>Method 2</GuideBadge>
-                        Manual Repository Installation
-                    </GuideTitle>
-                    <GuideSteps>
-                        <li>
-                            <StepNumber>1</StepNumber>
-                            <span>
-                                Open{" "}
-                                <strong>
-                                    <a href="https://vrchat.com/home/download" target="_blank" rel="noopener noreferrer">
-                                        VCC (VRChat Creator Companion)
-                                    </a>
-                                </strong>{" "}
-                                or{" "}
-                                <strong>
-                                    <a href="https://vrc-get.anatawa12.com/alcom/" target="_blank" rel="noopener noreferrer">
-                                        ALCOM
-                                    </a>
-                                </strong>
-                                .
-                            </span>
-                        </li>
-                        <li>
-                            <StepNumber>2</StepNumber>
-                            <span>
-                                Navigate to <strong>Settings</strong> &gt; <strong>Packages</strong> tab.
-                            </span>
-                        </li>
-                        <li>
-                            <StepNumber>3</StepNumber>
-                            <span>
-                                Click <strong>Add Repository</strong> in the top right.
-                            </span>
-                        </li>
-                        <li>
-                            <StepNumber>4</StepNumber>
-                            <span>
-                                Paste the listing URL shown below and click <strong>Add</strong>:
-                            </span>
-                        </li>
-                    </GuideSteps>
+                <Body>
+                    <GuideCard>
+                        <GuideTitle>
+                            <GuideBadge>{t("guide.method1")}</GuideBadge>
+                            {t("guide.method1Title")}
+                        </GuideTitle>
+                        <GuideDesc>{t("guide.method1Desc")}</GuideDesc>
+                        <GuideQuickAction>
+                            <Button type="button" $variant="primary" $glow onClick={onAddToVcc}>
+                                <PlusCircleIcon width={16} height={16} />
+                                <span>{t("guide.addNow")}</span>
+                            </Button>
+                        </GuideQuickAction>
+                    </GuideCard>
 
-                    <UrlBox>
-                        <UrlInputWrapper>
-                            <LinkIcon />
-                            <UrlInput
-                                type="text"
-                                id="vccListingInfoUrlField"
-                                readOnly
+                    <GuideCard>
+                        <GuideTitle>
+                            <GuideBadge>{t("guide.method2")}</GuideBadge>
+                            {t("guide.method2Title")}
+                        </GuideTitle>
+                        <GuideSteps>
+                            <li>
+                                <StepNumber>1</StepNumber>
+                                <span>
+                                    <RichText
+                                        message="guide.step1"
+                                        slots={{
+                                            vcc: (
+                                                <strong>
+                                                    <a
+                                                        href="https://vrchat.com/home/download"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        {t("guide.vccLong")}
+                                                    </a>
+                                                </strong>
+                                            ),
+                                            alcom: (
+                                                <strong>
+                                                    <a
+                                                        href="https://vrc-get.anatawa12.com/alcom/"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        {t("footer.alcom")}
+                                                    </a>
+                                                </strong>
+                                            ),
+                                        }}
+                                    />
+                                </span>
+                            </li>
+                            <li>
+                                <StepNumber>2</StepNumber>
+                                <span>
+                                    <RichText
+                                        message="guide.step2"
+                                        slots={{
+                                            settings: <strong>{t("guide.settings")}</strong>,
+                                            packagesTab: <strong>{t("guide.packagesTab")}</strong>,
+                                        }}
+                                    />
+                                </span>
+                            </li>
+                            <li>
+                                <StepNumber>3</StepNumber>
+                                <span>
+                                    <RichText
+                                        message="guide.step3"
+                                        slots={{ addRepository: <strong>{t("guide.addRepository")}</strong> }}
+                                    />
+                                </span>
+                            </li>
+                            <li>
+                                <StepNumber>4</StepNumber>
+                                <span>
+                                    <RichText message="guide.step4" slots={{ add: <strong>{t("guide.add")}</strong> }} />
+                                </span>
+                            </li>
+                        </GuideSteps>
+
+                        <UrlBox>
+                            <UrlInputWrapper>
+                                <LinkIcon />
+                                <UrlInput
+                                    type="text"
+                                    id="vccListingInfoUrlField"
+                                    readOnly
+                                    value={listing.url}
+                                    aria-label={t("hero.listingUrlAria")}
+                                />
+                            </UrlInputWrapper>
+                            <CopyButton
+                                id="vccListingInfoUrlFieldCopy"
                                 value={listing.url}
-                                aria-label="Listing URL"
+                                message={t("toast.copiedUrl")}
+                                onCopy={onCopy}
+                                icon={<CopyIcon />}
+                                label={t("copy.label")}
                             />
-                        </UrlInputWrapper>
-                        <CopyButton
-                            id="vccListingInfoUrlFieldCopy"
-                            value={listing.url}
-                            message="Repository URL copied!"
-                            onCopy={onCopy}
-                            icon={<CopyIcon />}
-                            label="Copy"
-                        />
-                    </UrlBox>
+                        </UrlBox>
 
-                    <GuideSteps start={5}>
-                        <li>
-                            <StepNumber>5</StepNumber>
-                            <span>
-                                Confirm the repository information and click <strong>"I Understand"</strong>.
-                            </span>
-                        </li>
-                        <li>
-                            <StepNumber>6</StepNumber>
-                            <span>Open your project to manage and install packages freely!</span>
-                        </li>
-                    </GuideSteps>
-                </GuideCard>
+                        <GuideSteps start={5}>
+                            <li>
+                                <StepNumber>5</StepNumber>
+                                <span>
+                                    <RichText
+                                        message="guide.step5"
+                                        slots={{ understand: <strong>{t("guide.iUnderstand")}</strong> }}
+                                    />
+                                </span>
+                            </li>
+                            <li>
+                                <StepNumber>6</StepNumber>
+                                <span>{t("guide.step6")}</span>
+                            </li>
+                        </GuideSteps>
+                    </GuideCard>
 
-                <GuideFooterNote>
-                    <InfoCircleIcon />
-                    <span>
-                        For more information, see official{" "}
-                        <a href="https://vcc.docs.vrchat.com" target="_blank" rel="noopener noreferrer">
-                            VCC Documentation
-                        </a>
-                        .
-                    </span>
-                </GuideFooterNote>
-            </Body>
-        </Dialog>
-    </Overlay>
-);
+                    <GuideFooterNote>
+                        <InfoCircleIcon />
+                        <span>
+                            <RichText
+                                message="guide.footer"
+                                slots={{
+                                    docs: (
+                                        <a
+                                            href="https://vcc.docs.vrchat.com"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {t("guide.vccDocs")}
+                                        </a>
+                                    ),
+                                }}
+                            />
+                        </span>
+                    </GuideFooterNote>
+                </Body>
+            </Dialog>
+        </Overlay>
+    );
+};

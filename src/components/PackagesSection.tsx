@@ -19,6 +19,7 @@ import {
     Wrapper,
 } from "./PackagesSection.styles";
 import { Button } from "../styles/buttons";
+import { useI18n } from "../i18n/Provider";
 
 interface PackagesSectionProps {
     packages: PackageMap;
@@ -37,6 +38,7 @@ const matchesQuery = (pkg: PackageInfo, term: string) => {
 };
 
 export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: PackagesSectionProps) => {
+    const { t } = useI18n();
     const [query, setQuery] = useState("");
     const searchInput = useRef<HTMLInputElement>(null);
 
@@ -73,16 +75,16 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
 
     const countLabel =
         total === 0
-            ? "0 packages"
+            ? t("packages.count.zero")
             : visible === total
-                ? `${total} ${total === 1 ? "package" : "packages"}`
-                : `${visible} of ${total} packages`;
+                ? t(total === 1 ? "packages.count.one" : "packages.count.many", { count: total })
+                : t("packages.count.filtered", { visible, total });
 
     return (
         <Section>
             <SectionHeader>
                 <TitleWrap>
-                    <SectionTitle>Packages</SectionTitle>
+                    <SectionTitle>{t("packages.title")}</SectionTitle>
                     <CountBadge id="packageCountBadge">{countLabel}</CountBadge>
                 </TitleWrap>
                 <SearchBox>
@@ -91,7 +93,7 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
                         ref={searchInput}
                         type="text"
                         id="searchInput"
-                        placeholder="Search packages by name, ID or description..."
+                        placeholder={t("packages.search")}
                         autoComplete="off"
                         value={query}
                         onChange={event => setQuery(event.target.value)}
@@ -99,8 +101,8 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
                     <ClearButton
                         type="button"
                         id="searchClearBtn"
-                        aria-label="Clear search"
-                        title="Clear search"
+                        aria-label={t("packages.clearSearch")}
+                        title={t("packages.clearSearch")}
                         hidden={!query}
                         onClick={() => {
                             setQuery("");
@@ -129,10 +131,8 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
                     <EmptyIcon>
                         <EmptySearchIcon />
                     </EmptyIcon>
-                    <EmptyTitle>No packages found</EmptyTitle>
-                    <EmptyDesc>
-                        No packages matched your search query. Try searching with different keywords.
-                    </EmptyDesc>
+                    <EmptyTitle>{t("packages.emptyTitle")}</EmptyTitle>
+                    <EmptyDesc>{t("packages.emptyDesc")}</EmptyDesc>
                     <Button
                         type="button"
                         $variant="secondary"
@@ -143,7 +143,7 @@ export const PackagesSection = ({ packages, onAddToVcc, onShowInfo, onCopy }: Pa
                             searchInput.current?.focus();
                         }}
                     >
-                        Clear Search Filter
+                        {t("packages.emptyAction")}
                     </Button>
                 </EmptyState>
             </Wrapper>

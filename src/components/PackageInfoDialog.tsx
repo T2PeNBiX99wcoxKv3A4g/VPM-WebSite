@@ -1,16 +1,6 @@
 import type { ListingInfo, PackageInfo } from "../types";
 import { CopyButton } from "./CopyButton";
-import {
-    CloseIcon,
-    CopyIcon,
-    ExternalLinkIcon,
-    FileIcon,
-    HelpCircleIcon,
-    LinkIcon,
-    PackageIcon,
-    PlusCircleIcon,
-    UserIcon,
-} from "./icons";
+import { CloseIcon, CopyIcon, ExternalLinkIcon, FileIcon, HelpCircleIcon, LinkIcon, PackageIcon, PlusCircleIcon, UserIcon } from "./icons";
 import {
     AccentLink,
     Body,
@@ -38,6 +28,7 @@ import {
 import { Badge, VersionBadge } from "./PackageCard.styles";
 import { UrlInput, UrlInputWrapper } from "./Hero.styles";
 import { Button, LinkButton } from "../styles/buttons";
+import { useI18n } from "../i18n/Provider";
 
 interface PackageInfoDialogProps {
     pkg: PackageInfo | null;
@@ -56,6 +47,7 @@ export const PackageInfoDialog = ({
     onShowHelp,
     onCopy,
 }: PackageInfoDialogProps) => {
+    const { t } = useI18n();
     const open = pkg !== null;
     const dependencies = Object.entries(pkg?.dependencies ?? {});
     const keywords = pkg?.keywords ?? [];
@@ -78,7 +70,7 @@ export const PackageInfoDialog = ({
                             <PackageIcon />
                         </IconBadge>
                         <div>
-                            <Title id="packageInfoName">{pkg?.displayName || pkg?.name || "Package Name"}</Title>
+                            <Title id="packageInfoName">{pkg?.displayName || pkg?.name || t("details.packageName")}</Title>
                             <MetaRow>
                                 <MetaId id="packageInfoId">{pkg?.name ?? "com.package.id"}</MetaId>
                                 <VersionBadge id="packageInfoVersion">
@@ -87,22 +79,27 @@ export const PackageInfoDialog = ({
                             </MetaRow>
                         </div>
                     </TitleWrap>
-                    <CloseButton type="button" id="packageInfoModalClose" aria-label="Close dialog" onClick={onClose}>
+                    <CloseButton
+                        type="button"
+                        id="packageInfoModalClose"
+                        aria-label={t("details.close")}
+                        onClick={onClose}
+                    >
                         <CloseIcon />
                     </CloseButton>
                 </Header>
 
                 <Body>
                     <Section>
-                        <SectionTitle>Description</SectionTitle>
+                        <SectionTitle>{t("details.description")}</SectionTitle>
                         <SectionText id="packageInfoDescription">
-                            {pkg?.description || "No description provided."}
+                            {pkg?.description || t("details.noDescription")}
                         </SectionText>
                     </Section>
 
                     <Grid2>
                         <Section>
-                            <SectionTitle>Author</SectionTitle>
+                            <SectionTitle>{t("details.author")}</SectionTitle>
                             <InlineInfo>
                                 <UserIcon />
                                 {pkg?.author?.url ? (
@@ -112,18 +109,20 @@ export const PackageInfoDialog = ({
                                         rel="noopener noreferrer"
                                         id="packageInfoAuthor"
                                     >
-                                        {pkg.author.name || "Unknown Author"}
+                                        {pkg.author.name || t("details.unknownAuthor")}
                                         <ExternalLinkIcon />
                                     </AccentLink>
                                 ) : (
-                                    <PlainValue id="packageInfoAuthor">{pkg?.author?.name || "Unknown Author"}</PlainValue>
+                                    <PlainValue id="packageInfoAuthor">
+                                        {pkg?.author?.name || t("details.unknownAuthor")}
+                                    </PlainValue>
                                 )}
                             </InlineInfo>
                         </Section>
 
                         {hasLicense ? (
                             <Section id="packageInfoLicenseContainer">
-                                <SectionTitle>License</SectionTitle>
+                                <SectionTitle>{t("details.license")}</SectionTitle>
                                 <InlineInfo>
                                     <FileIcon />
                                     {pkg?.licensesUrl ? (
@@ -133,11 +132,13 @@ export const PackageInfoDialog = ({
                                             rel="noopener noreferrer"
                                             id="packageInfoLicense"
                                         >
-                                            {pkg.license || "License"}
+                                            {pkg.license || t("details.license")}
                                             <ExternalLinkIcon />
                                         </AccentLink>
                                     ) : (
-                                        <PlainValue id="packageInfoLicense">{pkg?.license || "License"}</PlainValue>
+                                        <PlainValue id="packageInfoLicense">
+                                            {pkg?.license || t("details.license")}
+                                        </PlainValue>
                                     )}
                                 </InlineInfo>
                             </Section>
@@ -146,7 +147,7 @@ export const PackageInfoDialog = ({
 
                     {dependencies.length > 0 ? (
                         <Section id="packageInfoDependenciesContainer">
-                            <SectionTitle>Dependencies</SectionTitle>
+                            <SectionTitle>{t("details.dependencies")}</SectionTitle>
                             <DepList id="packageInfoDependencies">
                                 {dependencies.map(([name, version]) => (
                                     <li key={name}>{`${name} @ v${version}`}</li>
@@ -157,7 +158,7 @@ export const PackageInfoDialog = ({
 
                     {keywords.length > 0 ? (
                         <Section id="packageInfoKeywordsContainer">
-                            <SectionTitle>Keywords</SectionTitle>
+                            <SectionTitle>{t("details.keywords")}</SectionTitle>
                             <TagsCloud id="packageInfoKeywords">
                                 {keywords.map(keyword => (
                                     <Badge key={keyword}>{keyword}</Badge>
@@ -168,15 +169,15 @@ export const PackageInfoDialog = ({
 
                     <Section>
                         <SectionHeaderFlex>
-                            <SectionTitle>Repository Listing URL</SectionTitle>
+                            <SectionTitle>{t("details.listingUrl")}</SectionTitle>
                             <LinkButton
                                 type="button"
                                 id="packageInfoListingHelp"
-                                title="How to add listing to VCC"
+                                title={t("hero.help")}
                                 onClick={onShowHelp}
                             >
                                 <HelpCircleIcon />
-                                <span>Installation Guide</span>
+                                <span>{t("details.guide")}</span>
                             </LinkButton>
                         </SectionHeaderFlex>
                         <UrlBox>
@@ -187,16 +188,16 @@ export const PackageInfoDialog = ({
                                     id="packageInfoVccUrlField"
                                     readOnly
                                     value={listing.url}
-                                    aria-label="Listing URL"
+                                    aria-label={t("hero.listingUrlAria")}
                                 />
                             </UrlInputWrapper>
                             <CopyButton
                                 id="packageInfoVccUrlFieldCopy"
                                 value={listing.url}
-                                message="Repository URL copied!"
+                                message={t("toast.copiedUrl")}
                                 onCopy={onCopy}
                                 icon={<CopyIcon />}
-                                label="Copy"
+                                label={t("copy.label")}
                             />
                         </UrlBox>
                     </Section>
@@ -204,7 +205,7 @@ export const PackageInfoDialog = ({
                     <FooterActions>
                         <Button type="button" $variant="primary" onClick={onAddToVcc}>
                             <PlusCircleIcon width={16} height={16} />
-                            <span>Add Repository to VCC</span>
+                            <span>{t("details.addRepo")}</span>
                         </Button>
                     </FooterActions>
                 </Body>

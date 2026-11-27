@@ -11,6 +11,7 @@ import { PackageInfoDialog } from "./components/PackageInfoDialog";
 import { PackagesSection } from "./components/PackagesSection";
 import { RowMoreMenu } from "./components/RowMoreMenu";
 import { Toast } from "./components/Toast";
+import { useI18n } from "./i18n/Provider";
 
 interface AppProps {
     data: ListingData;
@@ -18,6 +19,7 @@ interface AppProps {
 
 export const App = ({ data }: AppProps) => {
     const { listing, packages } = data;
+    const { t } = useI18n();
     const { theme, toggleTheme } = useTheme();
     const [toast, setToast] = useState<string | null>(null);
     const [helpOpen, setHelpOpen] = useState(false);
@@ -71,7 +73,7 @@ export const App = ({ data }: AppProps) => {
     const handleToggleTheme = () => {
         const next = theme === "light" ? "dark" : "light";
         toggleTheme();
-        showToast(`Switched to ${next} theme`);
+        showToast(t("toast.theme", { theme: t(next === "light" ? "theme.light" : "theme.dark") }));
     };
 
     return (

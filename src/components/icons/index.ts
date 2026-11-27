@@ -16,6 +16,7 @@ export { default as GitHubIcon } from "./github.svg?react";
 export { default as HelpCircleIcon } from "./help-circle.svg?react";
 export { default as InfoCircleIcon } from "./info-circle.svg?react";
 export { default as InfoIcon } from "./info.svg?react";
+export { default as LanguageIcon } from "./language.svg?react";
 export { default as LinkIcon } from "./link.svg?react";
 export { default as MoonIcon } from "./moon.svg?react";
 export { default as PackageIcon } from "./package.svg?react";

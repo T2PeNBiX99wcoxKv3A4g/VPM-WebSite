@@ -41,6 +41,9 @@ it with sample data and fails if the result is not valid JavaScript.
 | `src/components/*.tsx`   | One component per section, dialog and card                    |
 | `src/components/*.styles.ts` | Its styled-components declarations                        |
 | `src/components/icons/`  | One `.svg` per icon, imported as a React component            |
+| `src/i18n.ts`            | `languages`, `translate()` and `detectLanguage()`              |
+| `src/i18n/*.json`        | One flat dictionary per language (en, ja, zh-CN, zh-TW)        |
+| `src/i18n/Provider.tsx`  | Language state, persistence and `?lang=` support               |
 | `src/styles/_tokens.scss`| Sass maps for the dark and light palettes                     |
 | `src/styles/_theme.scss` | Emits the `:root` / `[data-theme=light]` custom properties     |
 | `src/styles/global.scss` | Reset and document body (the only plain CSS)                  |
@@ -51,6 +54,10 @@ it with sample data and fails if the result is not valid JavaScript.
 Styling is split by responsibility: Sass generates the theme custom properties and the
 reset, while every component keeps its own rules next to it in styled-components and only
 reads `var(--…)`. Fonts are self-hosted through `@fontsource`.
+
+The UI is translated into English, Japanese, Simplified Chinese and Traditional
+Chinese. `translate()` falls back to English per key, the language is picked from
+`?lang=`, then the stored choice, then the browser preferences.
 
 Icons are plain `.svg` files under `src/components/icons/`; `vite-plugin-svgr` turns
 `import XIcon from "./x.svg?react"` into a React component that forwards props to the
@@ -64,6 +71,7 @@ npm install
 npm run dev            # UI preview with sample data (no rendered app.js)
 npm run build          # tsc + vite build + copies the template to dist/app.js
 npm run check:template # renders templates/app.js and syntax-checks the result
+npm run check:i18n     # every language defines the same keys and placeholders
 npm run upgrade        # drop the lockfile, bump every dependency, then npm install
 ```
 
