@@ -10,6 +10,8 @@ import {
     AuthorName,
     AuthorNameText,
     AuthorTag,
+    BannerContainer,
+    BannerImage,
     HeroContent,
     HeroDescription,
     HeroMeta,
@@ -35,6 +37,12 @@ export const Hero = ({ listing, onAddToVcc, onShowHelp, onCopy }: HeroProps) => 
 
     return (
         <HeroSection>
+            {listing.bannerImage && listing.bannerImageUrl ? (
+                <BannerContainer>
+                    <BannerImage $image={listing.bannerImageUrl} />
+                </BannerContainer>
+            ) : null}
+
             <HeroContent>
                 <RepoBadge>{t("hero.badge")}</RepoBadge>
                 <HeroTitle>{listing.name}</HeroTitle>
